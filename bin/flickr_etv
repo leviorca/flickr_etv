@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'flickr_etv'
+
+chatter = FlickrEtv::App.new
+chatter.start
