@@ -1,25 +1,26 @@
 require "flickr_etv/version"
-require 'flickraw'
+require "flickr_etv/dictionary"
+require "flickr_etv/flickr_connector"
+require "flickr_etv/photo"
 
 module FlickrEtv
   class App
-    def start
-      FlickRaw.api_key = "f58624c16f2bbf56fe744bba529c94d4"
-      FlickRaw.shared_secret = ""
+    def start(filename, keywords)
+      flickr_connector = FlickrEtv::FlickrConnector.new
 
-      list   = flickr.photos.getRecent
+      photo_urls = keywords.take(10).map do |keyword|
+        flickr_connector.find_photo_by_keyword(keyword)
+      end.compact
 
-      id     = list[0].id
-      secret = list[0].secret
-      info = flickr.photos.getInfo :photo_id => id, :secret => secret
+      while photo_urls.length != 10
+        keyword = FlickrEtv::Dictionary.read
+        photo_url = flickr_connector.find_photo_by_keyword(keyword)
+        photo_urls.push(photo_url) if photo_url
+      end
 
-      puts info.title           # => "PICT986"
-      puts info.dates.taken     # => "2006-07-06 15:16:18"
+      photos = photo_urls.map{|url| FlickrEtv::Photo.download(url)}
 
-      sizes = flickr.photos.getSizes :photo_id => id
-
-      original = sizes.find {|s| s.label == 'Original' }
-      puts original.width       # => "800" -- may fail if they have no original marked image
+      true
     end
   end
 end

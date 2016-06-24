@@ -22,6 +22,14 @@ Or install it yourself as:
 
 ## Usage
 
+flickr_etv [options]
+-h, --help                       Show help message
+-f, --filename FILENAME          The user-supplied filename where to write the result
+-k, --keywords KEYWORDS          Array of keywords to search
+
+Example:
+flickr_etv -f collage -k "winter","summer","pepito grillo"
+
 TODO: Write usage instructions here
 
 ## Development

@@ -1,6 +1,41 @@
 #!/usr/bin/env ruby
 
 require 'flickr_etv'
+require 'optparse'
+require 'pry'
 
-chatter = FlickrEtv::App.new
-chatter.start
+begin
+  # This will hold the options we parse
+  options = {}
+
+  OptionParser.new do |parser|
+
+    parser.banner = "Usage: flickr_etv -f filename -k keywords"
+
+    parser.on("-h", "--help", "Show this help message") do ||
+      puts parser
+    end
+
+    # Whenever we see -f or --file, with an
+    # argument, save the argument.
+    parser.on("-f", "--filename FILENAME", "The user-supplied filename where to write the result") do |v|
+      options[:filename] = v
+    end
+
+    # Note the `Array` arg. That tells the parser to cast the value to an int.
+    # I could have used `Float`, `Date`, or a number of other types.
+    parser.on("-k", "--keywords KEYWORDS", Array, "Array of keywords to search") do |v|
+      options[:keywords] = v
+    end
+  end.parse!
+
+  if options[:filename] && options[:keywords]
+    App = FlickrEtv::App.new
+    App.start(options[:filename], options[:keywords])
+  else
+    puts "Usage: flickr_etv -f filename -k keywords"
+  end
+
+rescue Exception => e
+  puts "Error: #{e.message}"
+end
