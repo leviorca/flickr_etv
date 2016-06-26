@@ -17,7 +17,7 @@ This gem depends on:
 * [Flickraw](https://github.com/hanklords/flickraw)
 * [ImageMagick](http://www.imagemagick.org/script/index.php)
 
-**Before to bundle you have to install *ImageMagick*. **
+> Before to bundle you have to install *ImageMagick*.
 On OSX, you can install *ImageMagick* with brew:
 
     $ brew install imagemagick
