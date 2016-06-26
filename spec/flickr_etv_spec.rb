@@ -3,7 +3,7 @@ require 'flickr_etv'
 
 describe FlickrEtv do
   let(:keywords) { ['Winter', 'Summer', 'Brexit'] }
-  let(:filename) { 'filename.jpg' }
+  let(:filename) { 'MyCollage.jpg' }
   let(:app) { FlickrEtv::App.new }
 
   it "true" do

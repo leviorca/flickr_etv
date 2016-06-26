@@ -5,3 +5,4 @@ gemspec
 
 gem 'pry'
 gem 'flickraw'
+gem 'rmagick'

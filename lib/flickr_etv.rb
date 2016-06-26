@@ -2,6 +2,7 @@ require "flickr_etv/version"
 require "flickr_etv/dictionary"
 require "flickr_etv/flickr_connector"
 require "flickr_etv/photo"
+require "flickr_etv/collage_maker"
 
 module FlickrEtv
   class App
@@ -19,6 +20,12 @@ module FlickrEtv
       end
 
       photos = photo_urls.map{|url| FlickrEtv::Photo.download(url)}
+
+      FlickrEtv::CollageMaker.build({photos: photos, output: filename})
+
+      photos.each do |photo|
+        FlickrEtv::Photo.delete(photo)
+      end
 
       true
     end
