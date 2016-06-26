@@ -1,49 +1,72 @@
 # FlickrEtv
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/flickr_etv`. To experiment with that code, run `bin/console` for an interactive prompt.
+FlickrEtv is a Ruby gem, it allows:
 
-TODO: Delete this and the text above, and describe your gem
+* Accepts a list of search keywords as arguments
+* Queries the Flickr API for the top-rated image for each keyword
+* Downloads the results
+* Crops them rectangularly
+* Assembles a collage grid from ten images and
+* Writes the result to a user-supplied filename
 
-## Installation
+## Dependencies
 
-Add this line to your application's Gemfile:
+This gem depends on:
 
-```ruby
-gem 'flickr_etv'
+* Ruby v2.3.1
+* [Flickraw](https://github.com/hanklords/flickraw)
+* [ImageMagick](http://www.imagemagick.org/script/index.php)
+
+On OSX, you can install *ImageMagick* with brew:
+
+    $ brew install imagemagick
+
+## Gem setup
+
+To use the Flickr API you need a Flickr API key.
+
+If you don't have a Flickr API key you can get one from [here](https://www.flickr.com/services/api/misc.api_keys.html).
+
+The gem reads the Flickr API key from the environent variables so you have a to define the follogin environent variables:
+
+```sh
+$ export FLICKR_API_KEY="Your Flickr API key"
+$ export FLICKR_SHARED_SECRET="Your Flickr shared secret"
 ```
 
-And then execute:
+Now we can install the needed gems:
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
+## Testing the gem
 
-    $ gem install flickr_etv
+The gem uses rspec so just type:
 
-## Usage
+    $ rspec
 
-flickr_etv [options]
--h, --help                       Show help message
--f, --filename FILENAME          The user-supplied filename where to write the result
--k, --keywords KEYWORDS          Array of keywords to search
+## Building and Installing
+
+The gem uses Rake tasks to build and install the gem:
+
+    $ rake build
+    $ rake install
+
+Now wecan run FlickrEtv.
+
+## Run
+
+FlickrEtv offers a command line interface.
+
+To check the arguments accepted run:
+
+    $ flickr_etv -h
 
 Example:
-flickr_etv -f collage -k "winter","summer","pepito grillo"
 
-TODO: Write usage instructions here
+If we want to create a collage with the following keywords: "Winter, Summer, Brexit" we need to type:
 
-## Development
+    $ flickr_etv -f MyNewCollage.jpg -k "Winter,Summer,Brexit"
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+That command will fetch for each keyword the top-rated image and fetch 7 images based on random keywords from _/usr/share/dict/words
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/flickr_etv.
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+The final collage will be saved to MyNewCollage.jpg

@@ -4,8 +4,8 @@ module FlickrEtv
   class FlickrConnector
 
     def initialize
-      FlickRaw.api_key = "f58624c16f2bbf56fe744bba529c94d4"
-      FlickRaw.shared_secret = ""
+      FlickRaw.api_key = ENV['FLICKR_API_KEY']
+      FlickRaw.shared_secret = ENV['FLICKR_SHARED_SECRET']
       @flickr_connector = FlickRaw::Flickr.new
     end
 

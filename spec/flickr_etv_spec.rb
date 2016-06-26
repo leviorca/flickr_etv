@@ -6,7 +6,7 @@ describe FlickrEtv do
   let(:filename) { 'MyCollage.jpg' }
   let(:app) { FlickrEtv::App.new }
 
-  it "true" do
+  it "should work" do
     expect(app.start(filename, keywords)).to be true
   end
 end
