@@ -28,7 +28,7 @@ To use the Flickr API you need a Flickr API key.
 
 If you don't have a Flickr API key you can get one from [here](https://www.flickr.com/services/api/misc.api_keys.html).
 
-The gem reads the Flickr API key from the environent variables so you have a to define the follogin environent variables:
+The gem reads the Flickr API key from the environment variables so you have a to define it:
 
 ```sh
 $ export FLICKR_API_KEY="Your Flickr API key"
@@ -68,6 +68,6 @@ If we want to create a collage with the following keywords: "Winter, Summer, Bre
 
     $ flickr_etv -f MyNewCollage.jpg -k "Winter,Summer,Brexit"
 
-That command will fetch for each keyword the top-rated image and fetch 7 images based on random keywords from _/usr/share/dict/words
+That command will fetch for each keyword the top-rated image and fetch 7 images based on random keywords from _/usr/share/dict/words_
 
 The final collage will be saved to MyNewCollage.jpg
